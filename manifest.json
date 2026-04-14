@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "Solo Sound",
+  "version": "1.0",
+  "description": "Only one tab plays sound at a time. When a tab starts playing audio or gets unmuted, all other audible tabs are automatically muted.",
+  "permissions": ["tabs"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{a61c32d6-fecc-4aad-a680-4beb7da0913d}"
+    }
+  },
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
