@@ -9,6 +9,10 @@
       "id": "{a61c32d6-fecc-4aad-a680-4beb7da0913d}"
     }
   },
+  "icons": {
+    "48": "icon.svg",
+    "128": "icon.svg"
+  },
   "background": {
     "scripts": ["background.js"]
   }

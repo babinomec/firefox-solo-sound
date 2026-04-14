@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Speaker body -->
+  <path d="M20 48h20l28-24v80L40 80H20a4 4 0 0 1-4-4V52a4 4 0 0 1 4-4z" fill="#4a90d9"/>
+  <!-- Single sound wave (solo) -->
+  <path d="M80 40c12 8 20 20 20 24s-8 16-20 24" fill="none" stroke="#4a90d9" stroke-width="6" stroke-linecap="round"/>
+  <!-- "1" badge -->
+  <circle cx="104" cy="28" r="18" fill="#e74c3c"/>
+  <text x="104" y="35" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="24" fill="white">1</text>
+</svg>
