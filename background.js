@@ -31,9 +31,13 @@ function muteOtherAudibleTabs(excludeTabId) {
 const pendingChecks = new Map();
 
 browser.tabs.onUpdated.addListener((tabId, changeInfo) => {
-  // User unmutes a tab → act immediately
+  // User unmutes a tab → check if it's actually playing before muting others
   if (changeInfo.mutedInfo && !changeInfo.mutedInfo.muted) {
-    muteOtherAudibleTabs(tabId);
+    setTimeout(() => {
+      browser.tabs.get(tabId).then(tab => {
+        if (tab.audible) muteOtherAudibleTabs(tabId);
+      }).catch(() => {});
+    }, 300);
     return;
   }
 
