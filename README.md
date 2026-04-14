@@ -6,9 +6,16 @@ A minimal Firefox extension that ensures only one tab plays sound at a time.
 
 - When you **unmute a tab**, all other audible tabs get muted automatically.
 - When a tab **starts playing audio**, all other audible tabs get muted.
+- Sounds shorter than a configurable threshold (default: 2 seconds) are ignored.
+- Tabs whose title matches a configurable list (Gmail, Slack, Discord, etc.) are ignored — so notification sounds play without muting anything.
 - Tabs that aren't producing sound are never touched.
 
-No configuration, no UI — just install and forget.
+## Settings
+
+Right-click the extension → "Manage Extension" → "Options" to configure:
+
+- **Debounce threshold** — how long a sound must play before triggering muting (default: 2s, set to 0 to disable)
+- **Ignored tab titles** — case-insensitive patterns, one per line. Tabs matching any pattern are excluded.
 
 ## Install
 
@@ -24,7 +31,10 @@ No configuration, no UI — just install and forget.
 
 ## Permissions
 
-This extension only requires the `tabs` permission to detect audio state changes and mute/unmute tabs. No data is collected or transmitted.
+- `tabs` — detect audio state changes and mute/unmute tabs
+- `storage` — persist settings
+
+No data is collected or transmitted.
 
 ## License
 
