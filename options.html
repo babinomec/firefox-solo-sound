@@ -3,44 +3,55 @@
 <head>
   <style>
     body { font-family: system-ui; padding: 16px; min-width: 300px; }
-    label { display: block; margin-bottom: 12px; }
-    input[type="number"], textarea { width: 100%; box-sizing: border-box; margin-top: 4px; }
-    textarea { height: 200px; font-family: monospace; }
+    h3 { margin: 0 0 4px 0; display: inline; }
+    .section { margin-bottom: 20px; }
+    .header { margin-bottom: 4px; }
+    .description { color: #666; font-size: 0.9em; margin-bottom: 8px; }
+    .sub { margin-left: 20px; }
+    label { display: block; margin-bottom: 8px; }
+    input[type="number"] { width: 100%; box-sizing: border-box; margin-top: 4px; }
+    textarea { width: 100%; box-sizing: border-box; margin-top: 4px; height: 200px; font-family: monospace; }
     small { color: #666; }
     #status { color: green; margin-top: 8px; }
-    button { margin-top: 8px; }
-    .toggle { margin-bottom: 4px; }
-    .sub { margin-left: 20px; }
     .disabled { opacity: 0.5; pointer-events: none; }
   </style>
 </head>
 <body>
-  <label class="toggle">
-    <input type="checkbox" id="debounceEnabled" checked>
-    Enable debounce
-  </label>
-  <div id="debounceSection" class="sub">
-    <label>
-      Threshold (seconds)
-      <input type="number" id="threshold" min="0.5" max="30" step="0.5" value="2">
-      <small>Sounds shorter than this are ignored (min: 0.5s).</small>
-    </label>
+  <div class="section">
+    <div class="header">
+      <input type="checkbox" id="debounceEnabled" checked>
+      <h3>Debounce</h3>
+    </div>
+    <div id="debounceSection" class="sub">
+      <p class="description">Ignores short sounds like notifications by waiting before triggering muting. When disabled, any sound will immediately trigger muting of other tabs. Use the title whitelist below to exclude known notification sources.</p>
+      <label>
+        Threshold (seconds)
+        <input type="number" id="threshold" min="0.5" max="30" step="0.5" value="1">
+        <small>Sounds shorter than this are ignored (min: 0.5s).</small>
+      </label>
+    </div>
   </div>
 
-  <label class="toggle">
-    <input type="checkbox" id="whitelistEnabled" checked>
-    Enable title whitelist
-  </label>
-  <div id="whitelistSection" class="sub">
-    <label>
-      Ignored tab titles (one per line, case-insensitive)
-      <textarea id="ignoredTitles"></textarea>
-      <small>Tabs whose title contains any of these patterns won't trigger muting.<br>Wrap in slashes for regex: <code>/pattern/</code></small>
-    </label>
+  <div class="section">
+    <div class="header">
+      <input type="checkbox" id="whitelistEnabled" checked>
+      <h3>Title whitelist</h3>
+    </div>
+    <div id="whitelistSection" class="sub">
+      <p class="description">Tabs whose title matches any of these patterns are excluded from muting entirely: they won't be muted and won't trigger muting of other tabs.</p>
+      <label>
+        Ignored tab titles (one per line, case-insensitive)
+        <textarea id="ignoredTitles"></textarea>
+        <small>Wrap in slashes for regex: <code>/pattern/</code></small>
+      </label>
+    </div>
   </div>
 
-  <button id="resetBtn">Reset to defaults</button>
-  <div id="status"></div>
+  <div>
+    <button id="resetBtn">Reset to defaults</button>
+    <span id="status"></span>
+  </div>
+
   <script src="defaults.js"></script>
   <script src="options.js"></script>
 </body>

@@ -25,7 +25,7 @@ A minimal Firefox extension that ensures only one tab plays sound at a time.
 
 Right-click the extension → "Manage Extension" → "Options" to configure:
 
-- **Debounce** — configurable threshold for how long a sound must play before triggering muting (default: 1s)
+- **Debounce** — ignores short sounds like notifications by waiting before triggering muting. Configurable threshold (default: 1s).
 - **Ignored tab titles** — case-insensitive patterns, one per line. Tabs matching any pattern are excluded. Supports regex when wrapped in slashes: `/pattern/`
 
 ## Permissions
