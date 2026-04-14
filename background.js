@@ -37,7 +37,7 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo) => {
       browser.tabs.get(tabId).then(tab => {
         if (tab.audible) muteOtherAudibleTabs(tabId);
       }).catch(() => {});
-    }, 300);
+    }, 100);
     return;
   }
 
