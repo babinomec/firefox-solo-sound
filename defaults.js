@@ -1,6 +1,6 @@
 const DEFAULTS = {
   debounceEnabled: true,
-  threshold: 2,
+  threshold: 1,
   whitelistEnabled: true,
   ignoredTitles: [
     'Discord',
