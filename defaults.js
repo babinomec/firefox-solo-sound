@@ -2,6 +2,7 @@ const DEFAULTS = {
   debounceEnabled: true,
   threshold: 1,
   whitelistEnabled: true,
+  ignorePinned: false,
   ignoredTitles: [
     'Discord',
     'Gmail',

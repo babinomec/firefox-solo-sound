@@ -7,12 +7,13 @@ browser.storage.onChanged.addListener((changes) => {
   }
 });
 
-function isIgnored(title) {
+function isExcluded(tab) {
+  if (settings.ignorePinned && tab.pinned) return true;
   if (!settings.whitelistEnabled) return false;
-  const lower = title.toLowerCase();
+  const lower = tab.title.toLowerCase();
   return settings.ignoredTitles.some(p => {
     if (p.startsWith('/') && p.endsWith('/')) {
-      try { return new RegExp(p.slice(1, -1), 'i').test(title); } catch { return false; }
+      try { return new RegExp(p.slice(1, -1), 'i').test(tab.title); } catch { return false; }
     }
     return lower.includes(p.toLowerCase());
   });
@@ -21,7 +22,7 @@ function isIgnored(title) {
 function muteOtherAudibleTabs(excludeTabId) {
   browser.tabs.query({ audible: true }).then(tabs => {
     for (const tab of tabs) {
-      if (tab.id !== excludeTabId && !isIgnored(tab.title)) {
+      if (tab.id !== excludeTabId && !isExcluded(tab)) {
         browser.tabs.update(tab.id, { muted: true });
       }
     }
@@ -47,7 +48,7 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo) => {
 
     if (!settings.debounceEnabled) {
       browser.tabs.get(tabId).then(tab => {
-        if (!isIgnored(tab.title)) muteOtherAudibleTabs(tabId);
+        if (!isExcluded(tab)) muteOtherAudibleTabs(tabId);
       }).catch(() => {});
       return;
     }
@@ -55,7 +56,7 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo) => {
     pendingChecks.set(tabId, setTimeout(() => {
       pendingChecks.delete(tabId);
       browser.tabs.get(tabId).then(tab => {
-        if (tab.audible && !isIgnored(tab.title)) muteOtherAudibleTabs(tabId);
+        if (tab.audible && !isExcluded(tab)) muteOtherAudibleTabs(tabId);
       }).catch(() => {});
     }, settings.threshold * 1000));
   }

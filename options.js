@@ -2,6 +2,7 @@ const els = {
   debounceEnabled: document.getElementById('debounceEnabled'),
   threshold: document.getElementById('threshold'),
   debounceSection: document.getElementById('debounceSection'),
+  ignorePinned: document.getElementById('ignorePinned'),
   whitelistEnabled: document.getElementById('whitelistEnabled'),
   ignoredTitles: document.getElementById('ignoredTitles'),
   whitelistSection: document.getElementById('whitelistSection'),
@@ -11,6 +12,7 @@ const els = {
 function load(s) {
   els.debounceEnabled.checked = s.debounceEnabled;
   els.threshold.value = s.threshold;
+  els.ignorePinned.checked = s.ignorePinned;
   els.whitelistEnabled.checked = s.whitelistEnabled;
   els.ignoredTitles.value = s.ignoredTitles.join('\n');
   updateSections();
@@ -27,6 +29,7 @@ function save() {
   const settings = {
     debounceEnabled: els.debounceEnabled.checked,
     threshold: isNaN(raw) ? DEFAULTS.threshold : raw,
+    ignorePinned: els.ignorePinned.checked,
     whitelistEnabled: els.whitelistEnabled.checked,
     ignoredTitles: els.ignoredTitles.value.split('\n').filter(l => l.trim())
   };
@@ -48,6 +51,7 @@ browser.storage.local.get(DEFAULTS).then(load);
 
 els.debounceEnabled.addEventListener('change', save);
 els.threshold.addEventListener('change', save);
+els.ignorePinned.addEventListener('change', save);
 els.whitelistEnabled.addEventListener('change', save);
 els.ignoredTitles.addEventListener('change', save);
 document.getElementById('resetBtn').addEventListener('click', reset);
