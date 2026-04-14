@@ -18,10 +18,10 @@
 </head>
 <body>
   <div class="section">
-    <div class="header">
+    <label class="header">
       <input type="checkbox" id="debounceEnabled" checked>
       <h3>Debounce</h3>
-    </div>
+    </label>
     <div id="debounceSection" class="sub">
       <p class="description">Ignores short sounds like notifications by waiting before triggering muting. When disabled, any sound will immediately trigger muting of other tabs. Use the title whitelist below to exclude known notification sources.</p>
       <label>
@@ -33,20 +33,20 @@
   </div>
 
   <div class="section">
-    <div class="header">
+    <label class="header">
       <input type="checkbox" id="ignorePinned">
       <h3>Ignore pinned tabs</h3>
-    </div>
+    </label>
     <div class="sub">
       <p class="description">Pinned tabs won't be muted and won't trigger muting of other tabs.</p>
     </div>
   </div>
 
   <div class="section">
-    <div class="header">
+    <label class="header">
       <input type="checkbox" id="whitelistEnabled" checked>
       <h3>Title whitelist</h3>
-    </div>
+    </label>
     <div id="whitelistSection" class="sub">
       <p class="description">Tabs whose title matches any of these patterns are excluded from muting entirely: they won't be muted and won't trigger muting of other tabs.</p>
       <label>
@@ -58,10 +58,10 @@
   </div>
 
   <div class="section">
-    <div class="header">
+    <label class="header">
       <input type="checkbox" id="autoUnmuteOnSwitch">
       <h3>Auto-unmute on tab switch</h3>
-    </div>
+    </label>
     <div class="sub">
       <p class="description">Automatically unmute a muted tab when you switch to it. This will also mute other audible tabs. Note: tabs you manually muted will also be unmuted.</p>
     </div>
