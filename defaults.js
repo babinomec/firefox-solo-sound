@@ -3,6 +3,7 @@ const DEFAULTS = {
   threshold: 1,
   whitelistEnabled: true,
   ignorePinned: false,
+  autoUnmuteOnSwitch: false,
   ignoredTitles: [
     'Discord',
     'Gmail',

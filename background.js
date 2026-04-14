@@ -67,3 +67,12 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo) => {
     pendingChecks.delete(tabId);
   }
 });
+
+browser.tabs.onActivated.addListener(({ tabId }) => {
+  if (!settings.autoUnmuteOnSwitch) return;
+  browser.tabs.get(tabId).then(tab => {
+    if (tab.mutedInfo.muted) {
+      browser.tabs.update(tabId, { muted: false });
+    }
+  }).catch(() => {});
+});
