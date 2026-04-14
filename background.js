@@ -21,7 +21,7 @@ function isIgnored(title) {
 function muteOtherAudibleTabs(excludeTabId) {
   browser.tabs.query({ audible: true }).then(tabs => {
     for (const tab of tabs) {
-      if (tab.id !== excludeTabId) {
+      if (tab.id !== excludeTabId && !isIgnored(tab.title)) {
         browser.tabs.update(tab.id, { muted: true });
       }
     }
