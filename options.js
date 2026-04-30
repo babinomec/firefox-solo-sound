@@ -4,6 +4,7 @@ const els = {
   debounceSection: document.getElementById('debounceSection'),
   ignorePinned: document.getElementById('ignorePinned'),
   autoUnmuteOnSwitch: document.getElementById('autoUnmuteOnSwitch'),
+  resumePrevious: document.getElementById('resumePrevious'),
   whitelistEnabled: document.getElementById('whitelistEnabled'),
   ignoredTitles: document.getElementById('ignoredTitles'),
   whitelistSection: document.getElementById('whitelistSection'),
@@ -15,6 +16,7 @@ function load(s) {
   els.threshold.value = s.threshold;
   els.ignorePinned.checked = s.ignorePinned;
   els.autoUnmuteOnSwitch.checked = s.autoUnmuteOnSwitch;
+  els.resumePrevious.checked = s.resumePrevious;
   els.whitelistEnabled.checked = s.whitelistEnabled;
   els.ignoredTitles.value = s.ignoredTitles.join('\n');
   updateSections();
@@ -33,6 +35,7 @@ function save() {
     threshold: isNaN(raw) ? DEFAULTS.threshold : raw,
     ignorePinned: els.ignorePinned.checked,
     autoUnmuteOnSwitch: els.autoUnmuteOnSwitch.checked,
+    resumePrevious: els.resumePrevious.checked,
     whitelistEnabled: els.whitelistEnabled.checked,
     ignoredTitles: els.ignoredTitles.value.split('\n').filter(l => l.trim())
   };
@@ -56,6 +59,7 @@ els.debounceEnabled.addEventListener('change', save);
 els.threshold.addEventListener('change', save);
 els.ignorePinned.addEventListener('change', save);
 els.autoUnmuteOnSwitch.addEventListener('change', save);
+els.resumePrevious.addEventListener('change', save);
 els.whitelistEnabled.addEventListener('change', save);
 els.ignoredTitles.addEventListener('change', save);
 document.getElementById('resetBtn').addEventListener('click', reset);

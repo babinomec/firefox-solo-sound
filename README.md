@@ -28,6 +28,7 @@ Right-click the extension → "Manage Extension" → "Options" to configure:
 - **Debounce** — ignores short sounds like notifications by waiting before triggering muting. Configurable threshold (default: 1s).
 - **Ignore pinned tabs** — pinned tabs won't be muted and won't trigger muting of other tabs (default: off).
 - **Auto-unmute on tab switch** — automatically unmutes a muted tab when you switch to it, muting other audible tabs (default: off).
+- **Resume previous tab** — when the current tab stops playing audio, automatically unmutes the tab that was muted because of it. Only remembers one tab (no cascading). Uses the debounce threshold to avoid resuming on brief pauses (default: off).
 - **Ignored tab titles** — case-insensitive patterns, one per line. Tabs matching any pattern are excluded. Supports regex when wrapped in slashes: `/pattern/`
 
 ## Permissions

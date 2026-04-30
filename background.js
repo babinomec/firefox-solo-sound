@@ -19,12 +19,22 @@ function isExcluded(tab) {
   });
 }
 
+let previousTabId = null;
+let currentTabId = null;
+let pendingResume = null;
+
 function muteOtherAudibleTabs(excludeTabId) {
   browser.tabs.query({ audible: true }).then(tabs => {
+    let muted = null;
     for (const tab of tabs) {
       if (tab.id !== excludeTabId && !isExcluded(tab)) {
+        if (!muted) muted = tab.id;
         browser.tabs.update(tab.id, { muted: true });
       }
+    }
+    if (settings.resumePrevious && muted) {
+      previousTabId = muted;
+      currentTabId = excludeTabId;
     }
   });
 }
@@ -46,6 +56,12 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo) => {
   if (changeInfo.audible === true) {
     clearTimeout(pendingChecks.get(tabId));
 
+    // Cancel pending resume if the tab that caused muting starts playing again
+    if (tabId === currentTabId && pendingResume) {
+      clearTimeout(pendingResume);
+      pendingResume = null;
+    }
+
     if (!settings.debounceEnabled) {
       browser.tabs.get(tabId).then(tab => {
         if (!isExcluded(tab)) muteOtherAudibleTabs(tabId);
@@ -61,10 +77,25 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo) => {
     }, settings.threshold * 1000));
   }
 
-  // Tab stops playing → cancel pending check
+  // Tab stops playing → cancel pending check, maybe resume previous
   if (changeInfo.audible === false) {
     clearTimeout(pendingChecks.get(tabId));
     pendingChecks.delete(tabId);
+
+    if (settings.resumePrevious && tabId === currentTabId && previousTabId !== null) {
+      clearTimeout(pendingResume);
+      const tabToResume = previousTabId;
+      const delay = settings.debounceEnabled ? settings.threshold * 1000 : 500;
+      pendingResume = setTimeout(() => {
+        browser.tabs.get(tabToResume).then(tab => {
+          if (tab.mutedInfo.muted) {
+            browser.tabs.update(tabToResume, { muted: false });
+          }
+        }).catch(() => {});
+        previousTabId = null;
+        currentTabId = null;
+      }, delay);
+    }
   }
 });
 

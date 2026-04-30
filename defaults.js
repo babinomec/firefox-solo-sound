@@ -4,6 +4,7 @@ const DEFAULTS = {
   whitelistEnabled: true,
   ignorePinned: false,
   autoUnmuteOnSwitch: false,
+  resumePrevious: false,
   ignoredTitles: [
     'Discord',
     'Gmail',
