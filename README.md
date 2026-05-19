@@ -11,9 +11,9 @@ A minimal Firefox extension that ensures only one tab plays sound at a time.
 
 ## Install
 
-### From Firefox Add-ons (coming soon)
+### From Firefox Add-ons
 
-<!-- [Install from addons.mozilla.org](https://addons.mozilla.org/firefox/addon/solo-sound/) -->
+[Install from addons.mozilla.org](https://addons.mozilla.org/firefox/addon/solo-sound/)
 
 ### Manual install
 
